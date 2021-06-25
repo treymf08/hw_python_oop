@@ -17,16 +17,17 @@ class Calculator(Record):
     def __init__(self, limit):
         self.limit = limit
         self.records = []
-        self.today = dt.date.today()
 
     def add_record(self, record):
         self.records.append(record)
 
     def get_today_stats(self):
+        self.today = dt.date.today()
         return sum(record.amount for record in self.records
                    if record.date == self.today)
 
     def get_week_stats(self):
+        self.today = dt.date.today()
         self.week = self.today - dt.timedelta(days=7)
         return sum(record.amount for record in self.records
                    if self.week < record.date <= self.today)
